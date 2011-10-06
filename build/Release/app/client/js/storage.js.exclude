@@ -1,0 +1,98 @@
+$(function () {
+
+    alert('db');
+
+    window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB;
+    window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange;
+    window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction;
+
+    var html5rocks = {};
+    html5rocks.indexedDB = {};
+
+    html5rocks.indexedDB.db = null;
+
+    html5rocks.indexedDB.open = function () {
+        var request = window.indexedDB.open("todos");
+
+        request.onsuccess = function (e) {
+            html5rocks.indexedDB.db = e.target.result;
+            // Do some more stuff in a minute
+        };
+
+        request.onfailure = html5rocks.indexedDB.onerror;
+    };
+
+    html5rocks.indexedDB.open = function () {
+        var request = indexedDB.open("todos",
+    "This is a description of the database.");
+
+        request.onsuccess = function (e) {
+            var v = "1.0";
+            html5rocks.indexedDB.db = e.target.result;
+            var db = html5rocks.indexedDB.db;
+            // We can only create Object stores in a setVersion transaction;
+            if (v != db.version) {
+                var setVrequest = db.setVersion(v);
+
+                // onsuccess is the only place we can create Object Stores
+                setVrequest.onfailure = html5rocks.indexedDB.onerror;
+                setVrequest.onsuccess = function (e) {
+                    var store = db.createObjectStore("todo",
+          { keyPath: "timeStamp" });
+
+                    html5rocks.indexedDB.getAllTodoItems();
+                };
+            }
+
+            html5rocks.indexedDB.getAllTodoItems();
+        };
+
+        request.onfailure = html5rocks.indexedDB.onerror;
+    };
+
+    html5rocks.indexedDB.addTodo = function (todoText) {
+        var db = html5rocks.indexedDB.db;
+        var trans = db.transaction(["todo"], window.IDBTransaction.READ_WRITE, 0);
+        var store = trans.objectStore("todo");
+        var request = store.put({
+            "text": todoText,
+            "timeStamp": new Date().getTime()
+        });
+
+        request.onsuccess = function (e) {
+            // Re-render all the todo's
+            html5rocks.indexedDB.getAllTodoItems();
+        };
+
+        request.onerror = function (e) {
+            console.log(e.value);
+        };
+    };
+
+    html5rocks.indexedDB.getAllTodoItems = function() {
+        //var todos = document.getElementById("todoItems");
+        //todos.innerHTML = "";
+
+        var db = html5rocks.indexedDB.db;
+        var trans = db.transaction(["todo"], window.IDBTransaction.READ_WRITE, 0);
+        var store = trans.objectStore("todo");
+
+        // Get everything in the store;
+        var keyRange = window.IDBKeyRange.lowerBound(0);
+        var cursorRequest = store.openCursor(keyRange);
+
+        cursorRequest.onsuccess = function(e) {
+            var result = e.target.result;
+            if(!!result == false)
+                return;
+
+            //renderTodo(result.value);
+            result.continue();
+        };
+
+        cursorRequest.onerror = html5rocks.indexedDB.onerror;
+    };
+
+    html5rocks.indexedDB.open(); // open displays the data previously saved
+
+});

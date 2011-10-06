@@ -1,0 +1,141 @@
+﻿/*
+ *
+ * Common Theme Colors
+ *
+ */
+
+// palette from: http://www.colourlovers.com/palette/103/Apple_Computers
+@Carisoprodol: #6C7479;
+@Lisinopril: #B2C0CD;
+@Imdur: #F9F9F9;
+@nuetral_blah: #F9F9F9;
+
+@contrast1: @Carisoprodol;
+@contrast2: @Lisinopril;
+@bg: @Imdur;
+@accent: @nuetral_blah;
+
+@textonbg: @contrast1;
+@textoncontrast: @bg;
+
+/*
+ * Theme Fonts
+ */
+@main-font-family: "Zegoe UI", "Segoe UI", "Trebuchet MS", Tahoma, Arial;
+@main-font-size: 12pt;
+
+html
+{
+	height:100%;
+	margin:0 0 0 0;
+	padding:0 0 0 0;
+}
+
+body
+{
+	font-family:@main-font-family;
+	font-size:@main-font-size;
+	height:100%;
+	margin:0 0 0 0;
+	padding:0 0 0 0;
+}
+
+#page
+{
+	width:100%;
+	height:100%;
+}
+
+.stretch-vertical
+{
+	height:100%;
+}
+
+.box-vertical
+{
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-box-align: stretch;	
+}
+
+.box-size-auto
+{
+}
+
+.box-size-stretch
+{
+	-webkit-box-flex: 1;
+}
+
+#page
+{	
+	background-color:@bg;
+}
+
+#page-content
+{
+	padding:10px 10px 10px 10px;
+}
+
+/*
+ * Header
+ */
+header
+{
+	height:auto;
+	padding: 2px 2px 2px 2px;
+	background-color:@bg;
+	display: -webkit-box;
+	-webkit-box-align: stretch;
+	-webkit-box-orient: horizontal;
+	color:@textonbg;
+}
+
+header section
+{
+	vertical-align:middle;
+}
+
+header section#navigation-section
+{
+	width:auto;
+	margin:4px;
+}
+
+header section#search-section
+{
+	-webkit-box-flex: 1;
+	color:@textonbg;
+}
+
+header * #search-form
+{
+	padding:4px 0px 0px 0px;
+}
+
+header section#tools-section
+{
+	margin:0px 4px 0px 4px;
+	padding:4px 0px 0px 0px;
+}
+
+header section * input
+{
+	width: 100%;
+}
+
+h1
+{
+	font-size:24pt;
+	font-family: @main-font-family;
+	font-weight:lighter;
+}
+
+#app-title
+{
+	background-image:url('/images/logo-24.png');
+	background-repeat:no-repeat;
+	text-indent:-10000px;
+	width:92px;
+	height:24px;
+}
