@@ -3,21 +3,23 @@
 <html>
 <head>
   <title>Jasmine Test Runner</title>
-  <link rel="stylesheet" type="text/css" href="js/libs/jasmine-1.0.2/jasmine.css">
- 
-  <script type="text/javascript" src="js/libs/jasmine-1.0.2/jasmine.js"></script>
-  <script type="text/javascript" src="js/libs/jasmine-1.0.2/jasmine-html.js"></script>
- 	
+  <link rel="stylesheet" type="text/css" href="scripts/libs/jasmine-1.0.2/jasmine.css">
+  <script type="text/javascript" src="scripts/libs/jasmine-1.0.2/jasmine.js"></script>
+  <script type="text/javascript" src="scripts/libs/jasmine-1.0.2/jasmine-html.js"></script>
+
+  <!-- include source files here... -->
+  <script src="http://localhost:9810/compile?id=curaapp-web" type="text/javascript" charset="ISO-8859-1" ></script>
+
+  <!-- include spec files here... -->
+
 </head>
 <body>
+<div id="page"></div>
 
-	<script src="http://localhost:9810/compile?id=client" type="text/javascript"
-			charset="utf-8" ></script>
- 	
-	<script type="text/javascript">
-	  jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
-	  jasmine.getEnv().execute();
-	</script>
+<script type="text/javascript">
+  jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
+  jasmine.getEnv().execute();
+</script>
 
 </body>
 </html>

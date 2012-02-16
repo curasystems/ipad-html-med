@@ -21,8 +21,8 @@
 /*
  * Theme Fonts
  */
-@main-font-family: "Zegoe UI", "Segoe UI", "Trebuchet MS", Tahoma, Arial;
-@main-font-size: 12pt;
+@main-font-family: "Segoe UI", "TrebuchetMS", "Trebuchet MS", Tahoma, Arial;
+@main-font-size: 18pt;
 
 html
 {
@@ -44,6 +44,25 @@ body
 {
 	width:100%;
 	height:100%;
+}
+
+/*this is what we want the div to look like*/
+div.fullscreen {
+  display:block;
+
+  /*set the div in the top-left corner of the screen*/
+  position:absolute;
+  top:0;
+  left:0;
+  
+  /*set the width and height to 100% of the screen*/
+  width:100%;
+  height:100%;
+}
+
+.viewer {
+  background-color: #000;
+  color: #fff;
 }
 
 .stretch-vertical
@@ -139,3 +158,114 @@ h1
 	width:92px;
 	height:24px;
 }
+
+ul.dicom_studies { 
+	margin-left:0px; 
+	margin-right:0px; 
+
+	list-style:none; 
+	-webkit-margin-before:0px;
+	-webkit-margin-after:0px;
+	-webkit-margin-start:0px;
+	-webkit-margin-end:0px;
+	-webkit-padding-start:0px;
+}
+
+ul.dicom_studies li {
+	margin-left:0px; 
+	margin-bottom:20px; 	
+}
+
+ul.dicom_studies span {
+	
+	width: 80px;
+	height: 30px;
+	margin-left:0px; 
+	margin-right:4px; 
+	line-height: 30px;
+
+}
+
+.dicom_studies_list_time_icon {
+	vertical-align:middle;
+}
+
+.dicom_studies_list_item_modality {
+	width: 20px;
+}
+
+.dicom_studies_list_item_series {
+	margin-left:31px;
+}
+
+.dicom_studies_list_item_series img {
+	margin-right:10px;
+}
+
+
+#right-col {
+	margin-left:50px;
+	width:100px;
+	display:inline;
+}
+
+#vertical {
+    position: relative;
+}
+
+h3 {
+	margin-left: 00px;	
+}
+
+.dicom_grouped_list {
+  padding-left:0px;
+	padding-bottom:50px;
+}
+
+/* Class name via Modernizr */
+#vertical {
+    border-left: 0px solid #ffffff;
+
+    /* Make a little room */
+    padding-left: 20px;
+}
+
+#vertical.divider h4 {
+	 	/*background: url('/images/horizontal-repeater.png');
+    background-repeat: repeat-x;
+    margin: 0px 0px;
+    width: 150px;*/
+}
+
+#vertical h4 {
+    /*background: #369;*/
+    color: #000;
+    padding: 0px 0px;
+    margin: 0 0 0 0;
+}
+
+#vertical h4 {
+
+		font-size: small;
+    /* Abs positioning makes it not take up vert space */
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    width: 200px;
+    height: 300px;
+
+    /* Border is the new background */
+    background: none;
+
+    /* Rotate from top left corner (not default) */
+    -webkit-transform-origin: 0px 0px;
+    -moz-transform-origin:    0 0;
+    -ms-transform-origin:     0 0;
+    -o-transform-origin:      0 0;
+
+    -webkit-transform: rotate(90deg);
+    -moz-transform:    rotate(90deg);
+    -ms-transform:     rotate(90deg);
+    -o-transform:      rotate(90deg);
+}
+

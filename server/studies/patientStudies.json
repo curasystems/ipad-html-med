@@ -1,0 +1,111 @@
+{
+  "studies":[
+    {
+      "id":"1",
+      "description": "Untersuchung A",
+      "modality": "CT",
+      "performed-at": "2012-02-15T04:20:10Z",
+      "series":[
+        {
+          "id":0,
+          "thumbUrl":"/images/series-001.jpg"
+        },
+        {
+          "id":1,
+          "thumbUrl":"/images/series-002.jpg"
+        }
+      ]
+    },
+    {
+      "id":"2",
+      "description": "Untersuchung B",
+      "modality": "NM",
+      "performed-at": "2012-02-12T12:10:10Z",
+      "series":[]
+    },
+    {
+      "id":"3",              
+      "description": "Untersuchung C",
+      "modality": "NM",
+      "performed-at": "2012-01-04T12:10:10Z",
+      "series":[
+        {
+          "thumbUrl":"/images/series-003.jpg"
+        },
+        {
+          "thumbUrl":"/images/series-004.jpg"
+        },
+        {
+          "thumbUrl":"/images/series-005.jpg"
+        },
+        {
+          "thumbUrl":"/images/series-006.jpg"
+        },
+        {
+          "thumbUrl":"/images/series-007.jpg"
+        }
+      ]
+    },
+    {
+      "id":"4",            
+      "description": "",
+      "modality": "NM",
+      "performed-at": "2011-11-04T12:10:10Z",
+      "series":[
+        {
+          "thumbUrl":"/images/series-003.jpg"
+        },
+        {
+          "thumbUrl":"/images/series-004.jpg"
+        },
+        {
+          "thumbUrl":"/images/series-007.jpg"
+        }
+      ]
+    },
+    {
+      "id":"5",              
+      "description": "Untersuchung E",
+      "modality": "NM",
+      "performed-at": "2011-10-18T12:10:10Z",      
+      "series":[]
+    },
+    {
+      "id":"6",              
+      "description": "Untersuchung F",
+      "modality": "NM",
+      "performed-at": "2007-08-18T12:10:10Z",      
+      "series":[
+        {
+          "thumbUrl":"/images/series-006.jpg"
+        },
+        {
+          "thumbUrl":"/images/series-007.jpg"
+        }
+      ]
+    },
+    {
+      "id":"7",              
+      "description": "Untersuchung C",
+      "modality": "NM",
+      "performed-at": "2006-08-18T18:10:10Z",      
+      "series":[
+        {
+          "thumbUrl":"/images/series-003.jpg"
+        },
+        {
+          "thumbUrl":"/images/series-004.jpg"
+        },
+        {
+          "thumbUrl":"/images/series-005.jpg"
+        },
+        {
+          "thumbUrl":"/images/series-006.jpg"
+        },
+        {
+          "thumbUrl":"/images/series-007.jpg"
+        }
+      ]
+    }
+  ]
+}

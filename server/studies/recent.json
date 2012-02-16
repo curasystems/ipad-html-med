@@ -1,0 +1,16 @@
+{
+  "studies": [
+    {
+      "description": "Untersuchung A",
+      "modality": "CT",
+      "performed-at": "2012-01-16T14:20:10Z",
+      "received-at": "2012-02-05T10:40:00Z",
+    },
+     {
+      "description": "Untersuchung B",
+      "modality": "NM",
+      "performed-at": "2012-01-18T12:10:10Z",
+      "received-at": "2012-01-18T12:12:00Z",
+    }
+  ]
+}
