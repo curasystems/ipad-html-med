@@ -1,0 +1,271 @@
+﻿/*
+ *
+ * Common Theme Colors
+ *
+ */
+
+// palette from: http://www.colourlovers.com/palette/103/Apple_Computers
+@Carisoprodol: #6C7479;
+@Lisinopril: #B2C0CD;
+@Imdur: #F9F9F9;
+@nuetral_blah: #F9F9F9;
+
+@contrast1: @Carisoprodol;
+@contrast2: @Lisinopril;
+@bg: @Imdur;
+@accent: @nuetral_blah;
+
+@textonbg: @contrast1;
+@textoncontrast: @bg;
+
+/*
+ * Theme Fonts
+ */
+@main-font-family: "Segoe UI", "TrebuchetMS", "Trebuchet MS", Tahoma, Arial;
+@main-font-size: 18pt;
+
+html
+{
+	height:100%;
+	margin:0 0 0 0;
+	padding:0 0 0 0;
+}
+
+body
+{
+	font-family:@main-font-family;
+	font-size:@main-font-size;
+	height:100%;
+	margin:0 0 0 0;
+	padding:0 0 0 0;
+}
+
+#page
+{
+	width:100%;
+	height:100%;
+}
+
+/*this is what we want the div to look like*/
+div.fullscreen {
+  display:block;
+
+  /*set the div in the top-left corner of the screen*/
+  position:absolute;
+  top:0;
+  left:0;
+  
+  /*set the width and height to 100% of the screen*/
+  width:100%;
+  height:100%;
+}
+
+.viewer {
+  background-color: #000;
+  color: #fff;
+}
+
+.stretch-vertical
+{
+	height:100%;
+}
+
+.box-vertical
+{
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-box-align: stretch;	
+}
+
+.box-size-auto
+{
+}
+
+.box-size-stretch
+{
+	-webkit-box-flex: 1;
+}
+
+#page
+{	
+	background-color:@bg;
+}
+
+#page-content
+{
+	padding:10px 10px 10px 10px;
+}
+
+/*
+ * Header
+ */
+header
+{
+	height:auto;
+	padding: 2px 2px 2px 2px;
+	background-color:@bg;
+	display: -webkit-box;
+	-webkit-box-align: stretch;
+	-webkit-box-orient: horizontal;
+	color:@textonbg;
+}
+
+header section
+{
+	vertical-align:middle;
+}
+
+header section#navigation-section
+{
+	width:auto;
+	margin:4px;
+}
+
+header section#search-section
+{
+	-webkit-box-flex: 1;
+	color:@textonbg;
+}
+
+header * #search-form
+{
+	padding:4px 0px 0px 0px;
+}
+
+header section#tools-section
+{
+	margin:0px 4px 0px 4px;
+	padding:4px 0px 0px 0px;
+}
+
+header section * input
+{
+	width: 100%;
+}
+
+h1
+{
+	font-size:24pt;
+	font-family: @main-font-family;
+	font-weight:lighter;
+}
+
+#app-title
+{
+	background-image:url('/images/logo-24.png');
+	background-repeat:no-repeat;
+	text-indent:-10000px;
+	width:92px;
+	height:24px;
+}
+
+ul.dicom_studies { 
+	margin-left:0px; 
+	margin-right:0px; 
+
+	list-style:none; 
+	-webkit-margin-before:0px;
+	-webkit-margin-after:0px;
+	-webkit-margin-start:0px;
+	-webkit-margin-end:0px;
+	-webkit-padding-start:0px;
+}
+
+ul.dicom_studies li {
+	margin-left:0px; 
+	margin-bottom:20px; 	
+}
+
+ul.dicom_studies span {
+	
+	width: 80px;
+	height: 30px;
+	margin-left:0px; 
+	margin-right:4px; 
+	line-height: 30px;
+
+}
+
+.dicom_studies_list_time_icon {
+	vertical-align:middle;
+}
+
+.dicom_studies_list_item_modality {
+	width: 20px;
+}
+
+.dicom_studies_list_item_series {
+	margin-left:31px;
+}
+
+.dicom_studies_list_item_series img {
+	margin-right:10px;
+}
+
+
+#right-col {
+	margin-left:50px;
+	width:100px;
+	display:inline;
+}
+
+#vertical {
+    position: relative;
+}
+
+h3 {
+	margin-left: 00px;	
+}
+
+.dicom_grouped_list {
+  padding-left:0px;
+	padding-bottom:50px;
+}
+
+/* Class name via Modernizr */
+#vertical {
+    border-left: 0px solid #ffffff;
+
+    /* Make a little room */
+    padding-left: 20px;
+}
+
+#vertical.divider h4 {
+	 	/*background: url('/images/horizontal-repeater.png');
+    background-repeat: repeat-x;
+    margin: 0px 0px;
+    width: 150px;*/
+}
+
+#vertical h4 {
+    /*background: #369;*/
+    color: #000;
+    padding: 0px 0px;
+    margin: 0 0 0 0;
+}
+
+#vertical h4 {
+
+		font-size: small;
+    /* Abs positioning makes it not take up vert space */
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    width: 200px;
+    height: 300px;
+
+    /* Border is the new background */
+    background: none;
+
+    /* Rotate from top left corner (not default) */
+    -webkit-transform-origin: 0px 0px;
+    -moz-transform-origin:    0 0;
+    -ms-transform-origin:     0 0;
+    -o-transform-origin:      0 0;
+
+    -webkit-transform: rotate(90deg);
+    -moz-transform:    rotate(90deg);
+    -ms-transform:     rotate(90deg);
+    -o-transform:      rotate(90deg);
+}
+
