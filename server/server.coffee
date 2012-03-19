@@ -6,6 +6,8 @@ class Node
   @fs = require 'fs'
   @http = require 'http'
   @url = require 'url'
+  @Mongolian = require 'mongolian'
+  @util = require 'util'
 
 ###
 HTTP Server
@@ -17,16 +19,66 @@ class Server
     server.listen Settings.Port
     console.log "listening on #{Settings.Port}"
 
+    @connect()
+
+  connect: ->
+    @server = new Node.Mongolian
+    @db = @server.db("rm-navigator")
+    @studies = @db.collection("study")
+
   handleRequest: (request,response) =>
-    pathname = Node.url.parse(request.url).pathname
-    
-    if pathname == '/favicon.ico'
+    url = Node.url.parse(request.url, true)
+        
+    if url.pathname == '/favicon.ico'
       response.writeHead 404
       response.end()
+    if url.pathname == '/studies/_search'
+      console.log "request for #{url.pathname}#{url.search}"
+      @searchStudies url.query.stuid, response
     else
-      console.log "request for #{pathname}"
-      filePath = "#{__dirname}#{pathname}.json"
-      this.serveFile filePath, response
+      console.log "request for #{url.pathname}"
+      filePath = "#{__dirname}#{url.pathname}.json"
+      @serveFile filePath, response
+
+  searchStudies: (studyUids, response) =>
+
+    Node.util.log Node.util.inspect studyUids
+
+    if studyUids instanceof Array
+      studyQuery = @studies.find {
+        uid: 
+          '$in':studyUids
+        }      
+    else
+      studyQuery = @studies.find uid:studyUids
+
+    studyQuery.sort 'performed-at':-1
+    
+    studyQuery.toArray (err,array) =>
+
+      if err
+        @writeError err 
+        return
+
+      studiesFound = (@stripIdFields(s) for s in array)
+
+      result = 'studies': studiesFound
+
+      response.writeHead 200, {
+          'Content-Type':'application/json',
+          'Access-Control-Allow-Origin': '*'
+          'Access-Control-Allow-Methods': 'POST, GET'
+        }
+
+      response.end  JSON.stringify(result)
+
+  writeError: (err) ->
+    Node.util.log "Error processing request:" + Node.util.inspect err
+
+  stripIdFields: (study) ->
+    study._id = undefined
+    study.id = study.id.toString()
+    return study
 
   serveFile: (path, response) =>    
     console.log "trying to serve file #{path}"
