@@ -34,13 +34,13 @@ class Server
       response.end()
     if url.pathname == '/studies/_search'
       console.log "request for #{url.pathname}#{url.search}"
-      @searchStudies url.query.stuid, response
+      @searchStudies url.query.stuid, url.query.accno, response
     else
       console.log "request for #{url.pathname}"
       filePath = "#{__dirname}#{url.pathname}.json"
       @serveFile filePath, response
 
-  searchStudies: (studyUids, response) =>
+  searchStudies: (studyUids, accNumbers, response) =>
 
     Node.util.log Node.util.inspect studyUids
 
@@ -48,9 +48,15 @@ class Server
       studyQuery = @studies.find {
         uid: 
           '$in':studyUids
-        }      
+        }     
+    else if accNumbers instanceof Array
+      studyQuery = @studies.find {
+        accno: 
+          '$in':accNumbers
+        }     
     else
       studyQuery = @studies.find uid:studyUids
+
 
     studyQuery.sort 'performed-at':-1
     
