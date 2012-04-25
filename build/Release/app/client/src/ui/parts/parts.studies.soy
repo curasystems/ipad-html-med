@@ -1,0 +1,91 @@
+{namespace parts.studies}
+
+/**
+ * Render a list of studies
+ *
+ * @param studies The studies to render
+ */
+{template .list}
+  <h3>UNTERSUCHUNGEN</h3>
+  <ol class='studies'>
+  {foreach $study in $studies}
+    <li>
+      <strong>{$study.modality}</strong> {$study.description}
+    </li>
+  {/foreach}
+  </ol>
+  <table id='table_studies'>
+    <thead>
+        <tr>
+            <th>Modality</th>
+            <th>Description</th>
+            <th>Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        {foreach $study in $studies}
+        <tr>
+            <td>{$study.modality}</td>
+            <td>{$study.description}</td>
+            <td>{$study.performedAt}</td>
+        </tr>
+        {/foreach}          
+    </tbody>
+  </table>
+{/template}
+
+/**
+ * @param content
+ */
+{template .demoPage}
+<!doctype>
+<html>
+<head>
+  <!--<link rel='stylesheet' href='tasks.css'>-->
+  <script src="/libs/jquery-1.7.1.min.js" type="text/javascript"></script>
+  <script src="/libs/jquery.dataTables.js" type="text/javascript"></script>
+  
+</head>
+<body>
+  {$content|noAutoescape}
+</body>
+<script>
+{literal}
+$(document).ready(function() {
+  $('#table_studies').dataTable()
+  } );
+{/literal}
+</script>
+</html>
+{/template}
+
+/**
+ * This template will be rendered by SoyWeb when the user loads tasks.soy.
+ * It deliberately includes dummy data so the designer can get a feel for how
+ * the task list will appear with real data rather with minimal copy and paste.
+ */
+{template .soyweb}
+{call .demoPage}
+  {param content}
+    {call .list}
+      {param studies: [
+		    [
+		      'description': 'Untersuchung A',
+		      'modality': 'CT',
+		      'performedAt': '14:20 Uhr'
+		    ],
+		    [
+		      'description': 'Untersuchung B',
+		      'modality': 'NM',
+		      'performedAt': '15:15 Uhr'
+		    ],
+		    [
+		      'description': 'Untersuchung C',
+		      'modality': 'NM',
+		      'performedAt': '08:03',
+		    ]
+		  ] /}
+    {/call}
+  {/param}
+{/call}
+{/template}

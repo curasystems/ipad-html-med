@@ -1,0 +1,160 @@
+{namespace templates.dicom.viewer}
+
+/**
+ * @param id
+ * @param thumbDataUrl
+ * @param imageUrl
+ * @param description
+ */
+{template .item}
+<a id="{$id}" href="{$imageUrl}" alt="{$description}" class='viewer item'>
+  <img src='{$thumbDataUrl}' alt="{$description}"/>
+</a>
+{/template}
+
+/**
+ * @param id
+ * @param description
+ * @param items
+ */
+{template .group}
+  <span id="{$id}">{$description}</span>
+  {foreach $item in $items}
+    <li>
+      {call .item data="$item" /}
+    </li>
+  {/foreach}
+{/template}
+
+/**
+ * @param groups
+ */
+{template .viewer}
+<div id="viewer" class='viewer fullscreen'>
+
+  <div id="MainContent" style="display:none">
+
+    <ul id='Gallery'>
+      {foreach $group in $groups}
+        {call .group data="$group" /}
+      {/foreach}
+    </ul>
+  
+  </div>
+
+</div>
+{/template}
+
+/**
+ * @param groups
+ */
+{template .itemList}
+<ul id='Gallery'>
+  {foreach $group in $groups}
+    {call .group data="$group" /}
+  {/foreach}
+</ul>
+{/template}
+
+
+/**
+ */
+{template .titleBar}
+<div class='dicom-viewer-titleBar' style='position:absolute; top:0px; width:100%; height:48px; display:block; z-index:5000' >
+  <span class='dicom-viewer-titleBar-caption' style='color:white; display:block; text-align:center'>Viewer</span>
+</div>
+{/template}
+
+
+/**
+ * @param content
+ */
+{template .demoPage}
+<!doctype>
+<html>
+<head>
+
+  <title>Viewer</title>
+  <meta name="author" content="curasystems GmbH - http://www.curasystems.de/" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+
+  <!-- Bootstrap -->
+  <!--
+  <link href="/css/font.css" rel="stylesheet" type="text/css" />
+  <link href="/libs/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" type="text/css" />
+  <script src="/libs/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+  -->
+  
+  <!-- Photoswipe -->
+  <link href="/libs/photoswipe/photoswipe.css" type="text/css" rel="stylesheet" />
+  
+  <script src="/libs/photoswipe/lib/klass.min.js" type="text/javascript" ></script>
+  <script src="/libs/photoswipe/code.photoswipe-3.0.4.min.js" type="text/javascript" ></script>
+      
+  <link href="templates.dicom.viewer.css" type="text/css" rel="stylesheet" />  
+  <script src="templates.dicom.viewer.js" type="text/javascript" ></script>
+</head>
+<body>
+  {$content|noAutoescape}
+</body>
+</html>
+{/template}
+
+/**
+ * This template will be rendered by SoyWeb when the user loads tasks.soy.
+ * It deliberately includes dummy data so the designer can get a feel for how
+ * the task list will appear with real data rather with minimal copy and paste.
+ */
+{template .soyweb}
+{call .demoPage}
+  {param content}
+    {call .viewer}
+      {param groups: [
+        [
+          '_id' : 'TEST',
+          'id' : 'TEST',
+          'type': 'study',
+          'description' : 'Thorax' ,
+          'modalities' : 'DX' ,
+          'performed-at' : '2012-03-15T11:00:00Z' ,
+          'studyId' : '0P10043535462000' ,
+          'uid' : '1.3.12.2.1107.5.8.9.1010144715133114222.465948',
+          'accno' : '0P10043535462000',
+          'items' : [
+            [
+              'id' : '1.3.51.0.7.13333459682.28371.10307.46150.24904.25966.63340',
+              'type': 'image',
+              'thumbDataUrl' : 'data:image/jpeg;base64,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',
+              'description' : 'Thorax Intensiv' ,
+              'modality' : 'DX' ,
+              'performed-at' : '2012-03-15T11:00:00Z' ,
+              'number' : '1' ,
+              'documentUrl' : '/document/1.3.51.0.7.13333459682.28371.10307.46150.24904.25966.63340',
+              'imageUrl' : 'dummy.jpg',
+              'width': 2048,
+              'height': 1536,
+              'frameCount': 1,
+            ],
+            [
+              'id' : '2.3.51.0.7.13333459682.28371.10307.46150.24904.25966.63340',
+              'type': 'image',
+              'thumbDataUrl' : 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/wAALCACAAJ0BAREA/8QAHQAAAQQDAQEAAAAAAAAAAAAABQMEBgcBAggACf/EAEIQAAEDAgUBAwkGAggHAAAAAAEAAgMEEQUGEiExQRNRYQcIIjJxgZGx0SNCcpOh8BTBFSQlM0Ric4MmNENSotLh/9oACAEBAAA/AKyziwPrYRex0cW8UOpoWUwsfTkPIA48Ff2R6+WlwbCtNU2NwMTOx0tLtB0X5F/vHg9OOSLawN0T3eqGk3FjyUTpgaeoM9hrHUrFVURVEmosF7225CxLLTxwaZntaD6oPre5BJMwQ05JgZqtySN1FzmiT+lHXlJjebFrgdipHQ4pHK4BzWE25AvdGI6TtJY3tdv7LhEJp2RtOp4I4sdkFxLMdNRmzXAy9Gjlb4fiDMYiLKnQX22cSLlYqcMgc5w0gHfYhNRl4EkuaD3BqJYdg7mxtAh02N9xYFMsZgkrKaeO4Y1hv4nZcgVkDWTSi2o6jz7VrQ1FTQa+xeWh9ri/clczuDK5ry0OeGWF+iHYZSz1s7IoWappDYAd/tK6CyjJhuGYFh8VaxjK2GMB+qEuc1w8QOlv0U2wfF6WueW08hc5o1G7XN2vbqO9Sjtu2pi8c9UJra1uGQOnkdbub3qu8w5ymlnDmBxbq2P8lE8RzDiDaiQsleLPIG3wXsMzJUSVkX8T61/WtYW8VYGC47TzPaXNsfmrAoKouYJLiwbsE1xWoaIACT33CrLNGIQU9Xu52pwuDfqmlLmmSnc0Qku07m7twptgme46ns46ppBPDyL2Umkr3RtDmubpO4I6pSkxGWaZrGuLnOOloG5J8EXxCvM2EzwDDi58sDGiRrdWrSLB3q3uR3EcLh7FJ30tURLE6Nkl3sc8WJbc2I7xsmhk1G973RPNNPpxCMNkjlLomuJYb6L9D4pHCZnYZNDPGAXxnUAe9dC5Zpp8bwCjrZayZk1QwSO0Bu3Ow24R7CMF/o+ofMZ5JnuYGfaBuwBv0AUlpC7Se4dVCs6Yq3UQwF5aLW+irGtrJ3Oc8tIiHI0336IFVSVIfCA8O2vxa9v2EQwx04qRJJGXNA462VgYDHBJVwtDNuTb2K0KVgjpmBtrEdU3xSCN7A0np0VZZzweOeT0HESM3b494UPnouz0tYS4t3c7uRCixGWlfGXN1j42VjZexoYpTdje5A2B5Rmg1wVDXtdpfG4Fp7iFjFcfrYIrRz6TGwhtmN2FuOPBckZgxWrx2oAq5u0bCCyJoaGhjb8AD922QcSvpfQcC4dFKMWANa91uAAU0adQsO9dKeT5n/BuE7f9AKVwx3CdzkU2HyOcdIsquzJi7TI/S2zQfWKgeJ1jqyUAHsxewI3+P1SMdOXRATPadJuHFt7j92RnC6Rk9SxrZGgfeLTtZWTl/C6aORrm7uAFtvBTuGFrYwLXs0JtWUgf1so7iOCiSQu2JsoRmTLZO7WO1DciPa6i8InoyWuYdj6rhuPepZlqQSVEbmExPB6qxzEBZ4+8LoHicRkEx6EFcq1Edp5PxH5rTsQel0SxN5NfLY8Gy2p4ho1Ftr9y6cyDTtdkrBjf/Djp7VKaalG1z8AmeaJ46aJsbyGgi9iqrxilfVzOMMb336huyBz4NWU13ikkcfYmMDXQyPa9mhx9LS5u/epFl+jpGSBgcWueb2ceB4FWfgOHRRuaWknjlTBlN6R2SVTRlzvR6IbUYdybX8EDrqMuLmkWt3qJ43hBbeQRNc8dbIThb29u1p+zcDurPw/VJhYLzqLRbUhtY20Mn4SuUKgXqJB/mPzWWxkDZKVkrTXTb/eT6JmuFljta66h8nsRGRsEBHNOLfqpdSQaGOda9hdCa/AnYk/tphdw4um7cvtb93jwTeqwRh6IHWZUhqy8OZfUCLgIZBk11K69wNJuPYp1lans0Bx1b/BTNlMCbgcpvVU9iS0bofNG8C+90IrYdYLhf3oPUMAadTb+CjVTh1O6pvs1wN7cKZ4C7VRuivqbbbwTPEABDKLfdPyXJk29VJ+I/NPImhzAorLXvqcWnBNmiQ7DqpjRPbJAxw3Fl1l5OYRJkTATb/Dj5lTKngbHGXO4TKcu1m2zUk6MFqZzUhcUnHhhc7hedgbn32tfql8Dwd1JUOaTzv71K205ETCOmyZVHru0+sOUNmc5Cax72uNm3B5CGz0vb8AC/ehtTlh87dQO44slcAhlwyctmdsdrdAnmL02mOUjq0lcjSR/1iT8R+aXjs1tlX1FVNlxGoJPMh+amWFVXZgMJu08LsryXyB+Q8CG3/Lj5lTaeI9mwDYDlD5pGNJTV81zsF5tyeE7p2u1BOWMcen6J7SU13h1t0VjhuzTbnhCauExvd1KHzsDvu7FD6injdfayZmla07b+1Z7IsFxuO9IS0gq3NB2N+Vri8FoZWkcMO647mGmpl/Efmk3SekuecJz6aCuqGVsbmtbM4dtGLjk8jke66tfLuP0uKU0NRTzslidw5p/dl255IMSjmybgcbTrcIBsO+6s2ufrgbHHyBuUGfRvLjfZKR0rW8pxHAwEbJ3EwBwsAlmtJ6IhRRaiT4cJ2G2AtyExqgJGl1ru6gIXMxpHch1VTkk23Qmp1xnqEhFWuY43370uZBK3VGdx0SeKPJoHSHnQb/BcZVc1p5b/wDcfmmAq9TnWPC5erXa6ibUAWl7jsP8xU08lkjuyqY73ayW494H0X0U83y0mVsKJHpCEW/VXPZsTnk7uJ+Cazs1HuSIjN0vHATZO4ow210q11jxsn9E0k6treCeuiAOx6Ie8NY7cbpvWUIkGtnsshUsBaSLIbVRBwNwhj6EPJ07JNlI+CUEXH80nmaXs8MeYxcuaTp79ui4hxPEWNll9IA6jz7UOpa0OMhv1XO1U275D3k/MqwfJTRkYe+Uj+8lJHsAAHyX0R8gkIpcjYdUWu7sgAP37VbbIzI1ruSeUsaawu5JPa1nCzEQdk4jZdbiMA7kBEaIaYxbhOZDYbDhB3zdnKSN/ak31Tn2sA0DuWtQ0SxBxFjwUHqoTvbhM+yIPC2cGuZpcN1Gszn+yKlruWgkfv3lcBZvlMs81iQ5rje3XflVvh2MVeLVVcIppqeGnlMTQHG5IJBJ94UVn4I63JCtryZUujBaVtuQT8SSuy/Jl5XcBy7lOiw6q/iTPDGA4xxXF/j4KwKLziMqQR6S2tJ7+xH1W0vnDZXeTtXfkj6pI+cFlZ3Su/JH1WB5weVW/drR/sj6pQecXlhuwFbb/RH1WzfOJysTu2u/JH1T+n84/KcbAC2v/IH1S8nnJ5TeDZtf+QP/AGQSTzg8smVzg2tH+yPqlovOFypy8VwPcIB9VtN5xeVHjSGVwaOPsR9Uyd5wmVid21pH+iPqtH+X3Kp3Da38kfVM5/L1lh17Cs/JH1QDMvluy7WYc9kYqg9wIN4v/vsXHuanhtRLIBcEn3hQbL+HiKvxXTu10rXg94Ivf9SobUjTdxGwN/38FduRKQ02F0cfVsTAfgrMoCI4dXuT2NwvylxutSbLU7nbde0W5/RKNIA2CWBIC859gkHHUVheIuki25XrWSUouLoTiDvs3qu82O+ycCgmX6MlkstvWDQfdf6hVzVQ9rMGAiz3Btvar8y5FpjZYKcU7P6va/VKxtLnJ4DYALUglbMuNgFtoN1sGbpbSSAsFvolJ6LLBasFqwGgrD27JnO7RdB8S9GO3fuq6zU67XBZy7Tj+B46qrY4O1xSlYBuZ2D/AMgugMv01omX7lLoY/RACcsbbayU0rIaLJRse6zpsVs1u6VDdK85u3gk9AI8UnwV4tSZ2K8RqGyY1TdkHxQHTv0CrfMwPaWPU7IlhUfZYdAbc3UBwrBpH5mo2Fh/vdXHcCf5K98GoDHC30eApDBCWgbdF5oIfZL9neyz2aVji2v0Xnx73CyxhBSmm60kuAk9RstC26wUk9at2SNQy7whOJR6onOtzsFXGY4i6VrbfeT+Rn8PRUjBzo1fFf/Z',
+              'description' : 'Thorax 2' ,
+              'modality' : 'DX' ,
+              'performed-at' : '2012-03-15T11:00:00Z' ,
+              'number' : '1' ,
+              'documentUrl' : '/document/1.3.51.0.7.13333459682.28371.10307.46150.24904.25966.63340',
+              'imageUrl' : 'dummy.jpg',
+              'width': 2048,
+              'height': 1536,
+              'frameCount': 1,
+            ]
+          ]        
+        ]
+      ]/}
+    {/call}
+  {/param}
+{/call}
+{/template}

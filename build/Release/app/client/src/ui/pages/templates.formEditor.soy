@@ -1,0 +1,35 @@
+{namespace templates.formEditor}
+
+/**
+ * @param label
+ * @param name
+ * @param title
+ */
+{template .textarea}
+  <p>{$label}<br/>
+  <textarea name="{$name}" id="{$name}" title="{$title}" rows=5 style="width:99%;"></textarea></p>
+{/template}
+
+/**
+ * @param name
+ * @param title
+ * @param style
+ */
+{template .summary}
+  <input type="text" name="{$name}" id="{$name}" title="{$title}" value="0" readonly="readonly" {$style}/>
+{/template}
+
+/**
+ * @param name
+ * @param size
+ * @param title
+ * @param style
+ * @param options
+ */
+{template .select}
+  <select name="{$name}" id="{$name}" size="{$size}" title="{$title}" {$style} >
+  {foreach $el in $options}
+  	<option value="{$el.value or $el.key}">{$el.key}</option>
+  {/foreach}
+  </select>
+{/template}

@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+  "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>Jasmine Test Runner</title>
+  <link rel="stylesheet" type="text/css" href="/libs/jasmine-1.2.0.rc3/jasmine.css">
+  <script type="text/javascript" src="/libs/jasmine-1.2.0.rc3/jasmine.js"></script>
+  <script type="text/javascript" src="/libs/jasmine-1.2.0.rc3/jasmine-html.js"></script>
+
+  <!--
+    Libs
+  -->
+
+  <script type="text/javascript" src="/libs/jquery-1.7.1.min.js"></script>
+
+  <link href="/libs/photoswipe/photoswipe.css" type="text/css" rel="stylesheet" />
+  <script src="/libs/photoswipe/lib/klass.min.js" type="text/javascript" ></script>
+  <script src="/libs/photoswipe/code.photoswipe-3.0.4.min.js" type="text/javascript" ></script>
+
+  <script src="/libs/noty/js/jquery.noty.js" type="text/javascript"></script>
+
+  <link rel="stylesheet" href="/libs/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/libs/bootstrap/css/bootstrap-responsive.min.css">
+  <script src="/libs/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+
+
+  <!-- Externals -->
+  <script src="libs/jquery-1.7.1.min.js" type="text/javascript" ></script>
+  <script src="libs/jasmine-jquery.js" type="text/javascript" ></script>
+   
+  <!-- include source files here... -->
+  <script src="http://localhost:9810/compile?id=curaapp-web" type="text/javascript" charset="ISO-8859-1" ></script>
+
+
+</head>
+<body>
+  <div id="page"></div>
+
+
+<script type="text/javascript">
+  jasmine.getEnv().addReporter(new jasmine.HtmlReporter());
+  jasmine.getEnv().execute();
+</script>
+
+</body>
+</html>

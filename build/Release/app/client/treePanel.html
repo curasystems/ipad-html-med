@@ -1,91 +1,30 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-  "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>Tree test</title>
-  <link rel="stylesheet" href="src/closure-library/closure/goog/css/tree.css">
-  <link rel="stylesheet" href="scripts/libs/bootstrap/css/bootstrap.min.css">
-  <style type="text/css">
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: Helvetica, Arial, Verdana, sans-serif;
-        font-size: 90%;
-        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-      }
-    textarea {
-        width:100%;
-        resize: none;
-        font-family: monospace;
-      }
-
-    .pane {
-        overflow:auto;
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        display: block;
-        border: 1px solid #eee;
-        height: 280px;
-      }
-
-    #outputPane * {
-        line-height: 1.4em;
-      }
-
-    #outputPane code {
-        font-size: 1.3em;
-      }
-
-    #outputPane>* {
-        margin-left: 4px;
-        margin-right: 4px;
-      }
-
-    #outputPane>blockquote {
-        margin-left: 3em;
-      }
-
-    .hfloat {
-        float: left;
-        margin: 10px;
-      }
-
-    label {
-        display: block;  /* block float the labels to left column, set a width */
-        float: left; 
-        width: 200px; 
-        padding: 0; 
-        margin: 5px 0 0; /* set top margin same as form input - textarea etc. elements */
-        text-align: right;
-      }
-
-    #outputPane>label::before {
-        content: '';
-      }
-
-    #outputPane>form input, #outputPane>form select {
-        width: 140px !important;
-      }
-    
-    .readOnlyInput {
-        border: none;
-        -webkit-box-shadow: none;
-        background: none;
-      }
-
-  </style>
-
+  <title>Formeditor Test</title>
+  <link rel="stylesheet" href="libs/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="libs/noty/css/jquery.noty.css">
+  <link rel="stylesheet" href="css/formEditor.css">
+  <link rel="stylesheet" href="css/goog/tree.css">
+  
   <!-- include source files here... --> 
-  <script src="src/Common.js" type="text/javascript"></script>
-  <script src="scripts/libs/showdown.js" type="text/javascript"></script>
-  <script src="scripts/libs/jquery-1.7.1.min.js" type="text/javascript"></script>
-  <script src="scripts/libs/jquery.populate.pack.js" type="text/javascript"></script>
-  <script src="scripts/libs/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+  <!-- <script src="scripts/Common.js" type="text/javascript"></script> -->
+  <script src="libs/showdown.js" type="text/javascript"></script>
+  <script src="libs/jquery-1.7.1.min.js" type="text/javascript"></script>
+  <script src="libs/jquery.populate.pack.js" type="text/javascript"></script>
+  <script src="libs/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="libs/noty/js/jquery.noty.js" type="text/javascript"></script>
  
   <script src="http://localhost:9810/compile?id=curaapp-web" type="text/javascript" charset="ISO-8859-1" ></script>
-
+  <script type="text/javascript">
+    $(function() {
+        $('textarea[id$=inputPane]').scroll(function() {
+            $('div[id$=outputPane]')
+            .scrollTop($('textarea[id$=inputPane]').scrollTop());
+        });
+    });
+  </script>
 </head>
 <body>
   <div class="navbar navbar-fixed-top">
@@ -108,8 +47,8 @@
     <div class="row-fluid">
       <div class="span2">
         <ul class="nav nav-pills">
-          <li><a href="#">Create Folder</a></li>
-          <li><a href="#">Create Form</a></li>
+          <li><a id="createFolderBtn" href="#">Create Folder</a></li>
+          <li><a id="createFormBtn" href="#">Create Form</a></li>
         </ul>
         <div class="well sidebar-nav">
           <!--Sidebar content-->
@@ -119,142 +58,18 @@
       <div class="span5">
         <!--left pane content-->
         <ul class="nav nav-pills">
-          <li><a href="#">Save</a></li>
-          <li><a href="#">Reset</a></li>
+          <li><a id="saveFormBtn" href="#">Save</a></li>
+          <li><a id="resetFormBtn" href="#">Reset</a></li>
+          <li><a id="deleteFormBtn" href="#">Delete</a></li>
         </ul>
-        <textarea id="inputPane">
-eCRF für MACPAF
-===============
-
-MACPAF Studie für [Charité](http://www.charite.de)
-
-@Version pb, 2010-11-18
-
-Daten für Patient [Patient.DisplayName], Untersuchung [Study.Modality] [Study.PerformedAt]
-
-Test:
------
-
-Nie de wa (bil der gen mit Auf der wie Wein die ine so auf Fort ung dern: [die][hauch] sie un Die gervar Zie O. Krein kans al derium häll aufel 300 Keie sichhodes 'Inflech Land esein Urstif en. Unve poter [vonach][mrmrainline] der aus jen. Fällt a. Chiedie erschen und deranz ernen Makt dinesion Fellich au wen: Regedin Gat weits ma taart mies dafter Bein 65 173 Moren, Affnen Gem Mor, immerhie deuten eutzte mühren len ket [benie][mrdifnuminline] Techt) blendlichke Prol, kauswuß die Lor Phies Krahren dastke Matte S. 
- 
-* [Verschluss MRT][mrmra]
-* [DWI Restriktion MRT?][mrdif]
-* [Geburtsdatum][Geburtsdatum]
-
-(mrdif = Ja)
-
-  * [n DWI Restriktion MRT?][mrdifnum]
-  * [Seite Diff.störung MRT][mrdsei]
-  * [Aspects-Score d1 MRT][mrsaspa1d]
-  * [Vol.(ml) DWI MRT][mrdvol]
-  * [Typ akuten Infarkts MRT][mrinft]
-  * [Diff. Ant.-geb. MRT][mrdant]
-  * [Diff. Post.-geb. MRT][mrdpos]
-  * [FLAIR pathologisch MRT?][mrflai]
-  * [Mikroangiopathie?][mrfmik]
-  * [vorbest. Terr.inf.][mrftea]
-
-Wahlund Score rechts
---------------------
-
-{Horizontal}
-
-* [Frontal][mrfwfr]
-* [Parieto-Occipital][mrfwpr]
-* [Temporal][mrfwtr]
-* [Basal ganglia][mrfwbr]
-* [Infratentorial][mrfwir]
-
-Summe: [sum()][mrfwsr]
-
-Wahlung Score links
--------------------
-
-{Horizontal}
-
-* [Frontal][mrfwfl]
-* [Parieto-Occipital][mrfwpl]
-* [Temporal][mrfwtl]
-* [Basal ganglia][mrfwbl]
-* [Infratentorial][mrfwil]
- 
-Summe: [sum()][mrfwsl]
-
-[Kommentar][mrfcom]
-
-Definitionen
-------------
-
-[mrmra]: [Beurteilung] "Gefäßverschluss MRT-Messung"
-[mrmrainline]: [Beurteilung] "Gefäßverschluss MRT-Messung 2"
-[mrdif]: [Beurteilung] "Diffusion Restriktion MRT-Messung?"
-[mrdifnum]: [AnzahlMessungen] "Anzahl der Diffusionsrestriktionen MRT Messung?"
-[mrdifnuminline]: [AnzahlMessungen] "Anzahl der Diffusionsrestriktionen MRT Messung 2 ?"
-[mrdsei]: [Seite] "Seite der Diffusionsstörung MRT-Messung"
-[mrsaspa1d]: [Score] "Aspects-Score: betroffene Areale Tag1 MRT-Messung"
-[mrdvol]: [Volumen] "Läsionsvolumen Diffusion in ml MRT-Messung bei Territorialinfarkten" 
-[mrinft]: "Typ des akuten Infarktes MRT-Messung"
-
-  1 "Lakune/SSI"
-  2 "Territorialinfarkt"
-  3 "Grenzzone"
-  
-[mrdant]: [Beurteilung] "Diffusionsstörung im Anterior-Stromgebiet MRT-Messung"
-[mrdpos]: [Beurteilung] "Diffusionsstörung im Posterior-Stromgebiet MRT-Messung"
-[mrflai]: [Beurteilung] "FLAIR Pathologischer Befund MRT-Messung?"
-[mrfmik]: [Beurteilung] "Mikroangiopathie MRT-Messung?"
-[mrftea]: [Beurteilung] "vorbestehender Territorialinfarkt MRT-Messung"
-
-Typen
------
-
-[Beurteilung]:
-
-  0 "Nein"
-  1 "Ja"
-  8 "nicht beurteilbar"
-  9 "nicht durchgeführt"
-
-[Score]:
-
-  1  Caudatus
-  2  Linsenkern
-  3  "innere Kapsel"
-  4  Insel
-  11 m1
-  12 m2
-  13 m3
-  14 m4
-  15 m5
-  16 m6
-
-[AnzahlMessungen]: 0-100000
-
-[Seite]:
-    
-  1 "rechts"
-  2 "links"
-  3 "beide"
-  8 "nicht beurteilbar"
-
-[Volumen]: 0-100000  
-
-[Geburtsdatum]: Datum
-
-
-Context
--------
-
-[Study]: @Study
-[Patient]: @Study.DicomPatient
-        </textarea>
+        <textarea id="inputPane"> -- No form selected -- </textarea>
       </div>
       <div class="span5">
         <!--right pane content-->
         <ul class="nav nav-pills">
           <li><a id="getJsonBtn" href="#">Get JSON</a></li>
           <li><a id="loadJsonBtn" href="#">Load Test Data</a></li>
-         <li> <a id="toggleEditableBtn" href="#">Toggle Readonly View</a></li>
+          <li><a id="toggleEditableBtn" href="#">Toggle Readonly View</a></li>
         </ul>
         <div id="outputPane" class="pane">output</div>
       </div>

@@ -1,0 +1,239 @@
+{namespace templates.dicom.studies}
+
+/**
+ * @param type
+ * @param performed
+ * @param modality
+ * @param description
+ */
+{template .itemHeader}
+  <div class='dicom_studies_list_item_header'>
+    {if $type == 'time'}
+      <img title='{$performed} Uhr' class='time_icon' src='/images/icon_time.png' />
+    {else}
+      <img title='{$performed}' class='dicom_studies_list_date_icon' src='/images/icon_calendar_grid.png'/>    
+    {/if}
+    <span>{$performed}</span>
+    <span class='dicom_studies_list_item_modality'><strong>{$modality}</strong></span>
+    <span>{$description}</span>
+  <div>
+{/template}
+
+/**
+ * Render a list of studies
+ *
+ * @param thumbUrl The series to render
+ * @param thumbDataUri The data uri to render if present
+ */
+{template .seriesThumb}
+  {if $thumbDataUri.length > 0 }
+    <img width='64' src='{$thumbDataUri}' />
+  {else}
+    <img width='64' src='{$thumbUrl}' />
+  {/if}
+{/template}
+
+/**
+ * Render a list of studies
+ *
+ * @param studies The studies to render
+ */
+{template .list}
+  <ul class='dicom_studies'>
+    {foreach $study in $studies}
+    <li id='{$study.id}' class='dicom_studies_list_item' >          
+       {call .itemHeader data="$study" /}
+       <div class='dicom_studies_list_item_series'>
+       {foreach $s in $study.series}
+         {call .seriesThumb data="$s" /}
+       {ifempty}         
+       {/foreach}
+       </div>
+    </li>
+    {/foreach}
+  </ul>
+{/template}
+
+/**
+ * Render a list of studies
+ *
+ * @param groupedStudies The studies to render
+ */
+{template .groupedList}
+  <div class='dicom_grouped_list'>
+    <h3>Dicom Studien</h3>
+    {if $groupedStudies.today.studies.length > 0}
+    <div id='vertical' class='divider'>
+      <h4>{$groupedStudies.today.title}</h4>
+      {call .list data="$groupedStudies.today" /}
+    </div>
+    {/if}
+    {if $groupedStudies.older.studies.length > 0}
+    <div id='vertical' style='margin-top:50px'>
+      <h4>{$groupedStudies.older.title}</h4>
+      {call .list data="$groupedStudies.older" /}
+    </div>
+    {/if}
+  </div> 
+{/template}
+
+/**
+ * @param content
+ */
+{template .demoPage}
+<!doctype>
+<html>
+<head>
+  <!-- Styles -->
+  <link rel="stylesheet" type="text/css" href="/css/font.css" />
+  <link rel="stylesheet/less" type="text/css" href="/css/client.less" />
+  <script src="/libs/less-1.1.3.min.js" type="text/javascript"></script>
+      
+</head>
+<body>
+  {$content|noAutoescape}
+</body>
+</html>
+{/template}
+
+/**
+ * This template will be rendered by SoyWeb when the user loads tasks.soy.
+ * It deliberately includes dummy data so the designer can get a feel for how
+ * the task list will appear with real data rather with minimal copy and paste.
+ */
+{template .soyweb}
+{call .demoPage}
+  {param content}
+    {call .groupedList}
+      {param groupedStudies: [
+        'todayEmpty':['studies':[]],
+        'today':[
+          'title': 'Heute',
+          'studies':[
+            [
+              'id':'1',
+              'description': 'Untersuchung A',
+              'modality': 'CT',
+              'type':'time',
+              'performed': '14:20',
+              'series':[
+                [
+                  'id':0,
+                  'thumbUrl':'/images/series-001.jpg'
+                ],
+                [
+                  'id':1,
+                  'thumbUrl':'/images/series-002.jpg'
+                ]
+              ]
+            ],
+            [
+              'id':'2',
+              'description': 'Untersuchung B',
+              'modality': 'NM',
+              'type':'time',
+              'performed': '15:15',
+              'series':[]
+            ]
+          ]
+        ],
+        'older': [
+          'title': 'Frühere Untersuchungen',
+          'studies':[
+            [
+              'id':'3',              
+              'description': 'Untersuchung C',
+              'modality': 'NM',
+              'type':'date',
+              'performed': '07.01',
+              'series':[
+                [
+                  'thumbUrl':'/images/series-003.jpg'
+                ],
+                [
+                  'thumbUrl':'/images/series-004.jpg'
+                ],
+                [
+                  'thumbUrl':'/images/series-005.jpg'
+                ],
+                [
+                  'thumbUrl':'/images/series-006.jpg'
+                ],
+                [
+                  'thumbUrl':'/images/series-007.jpg'
+                ]
+              ]
+            ],
+            [
+              'id':'4',            
+              'description': '',
+              'modality': 'NM',
+              'type':'date',
+              'performed': '07.01',
+              'series':[
+                [
+                  'thumbUrl':'/images/series-003.jpg'
+                ],
+                [
+                  'thumbUrl':'/images/series-004.jpg'
+                ],
+                [
+                  'thumbUrl':'/images/series-007.jpg'
+                ]
+              ]
+            ],
+            [
+              'id':'5',              
+              'description': 'Untersuchung E',
+              'modality': 'NM',
+              'type':'date',
+              'performed': '07.01',
+              'series':[
+              ]
+            ],
+            [
+              'id':'6',              
+              'description': 'Untersuchung F',
+              'modality': 'NM',
+              'type':'date',
+              'performed': '07.01',
+              'series':[
+                [
+                  'thumbUrl':'/images/series-006.jpg'
+                ],
+                [
+                  'thumbUrl':'/images/series-007.jpg'
+                ]
+              ]
+            ],
+            [
+              'id':'7',              
+              'description': 'Untersuchung C',
+              'modality': 'NM',
+              'type':'date',
+              'performed': '07.01',
+              'series':[
+                [
+                  'thumbUrl':'/images/series-003.jpg'
+                ],
+                [
+                  'thumbUrl':'/images/series-004.jpg'
+                ],
+                [
+                  'thumbUrl':'/images/series-005.jpg'
+                ],
+                [
+                  'thumbUrl':'/images/series-006.jpg'
+                ],
+                [
+                  'thumbUrl':'/images/series-007.jpg'
+                ]
+              ]
+            ],
+          ]
+        ]
+      ] /}
+    {/call}
+  {/param}
+{/call}
+{/template}

@@ -1,0 +1,117 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Helvetica, Arial, Verdana, sans-serif;
+    font-size: 90%;
+    padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+  }
+textarea {
+    width:100%;
+    resize: none;
+    font-family: monospace;
+  }
+
+.pane {
+    overflow:auto;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: block;
+    border: 1px solid #eee;
+    height: 280px;
+  }
+
+#outputPane * {
+    line-height: 1.4em;
+  }
+
+#outputPane code {
+    font-size: 1.3em;
+  }
+
+#outputPane>* {
+    margin-left: 4px;
+    margin-right: 4px;
+  }
+
+#outputPane>blockquote {
+    margin-left: 3em;
+  }
+
+.hfloat {
+    float: left;
+    margin: 10px;
+  }
+
+label {
+    display: block;  /* block float the labels to left column, set a width */
+    float: left; 
+    width: 200px; 
+    padding: 0; 
+    margin: 5px 0 0; /* set top margin same as form input - textarea etc. elements */
+    text-align: right;
+  }
+
+#outputPane>label::before {
+    content: '';
+  }
+
+#outputPane>form input, #outputPane>form select {
+    width: 140px !important;
+  }
+
+.readOnlyInput {
+    border: none;
+    -webkit-box-shadow: none;
+    background: none;
+  }
+
+.modal-dialog-bg {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background-color: #FFF;
+}
+
+.modal-dialog {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 300px;
+  background-color: #AAF;
+  border: 2px solid #99c0ff;
+}
+
+.modal-dialog-title {
+  position:relative;
+  background: #C3D9FF;
+  padding: 4px;
+  font: bold 11px verdana;
+  cursor: default;
+}
+
+.modal-dialog-content label {
+  text-align: left;
+}
+
+.modal-dialog-content {
+  background: #E8EEF7;
+  padding: 12px 18px 12px 18px;  font: normal 12px verdana;
+  font: normal 12px verdana;
+}
+
+.modal-dialog-userInput {
+  font: normal 12px verdana;
+  width: 90%;
+}
+
+.modal-dialog-buttons {
+  background: #E8EEF7;
+  padding: 4px;
+  font: normal 12px verdana;
+  text-align: right;
+}
+
+.modal-dialog-buttons button {
+  margin: 5px;
+}
