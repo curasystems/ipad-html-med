@@ -6,7 +6,7 @@ body {
     padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
   }
 textarea {
-    width:100%;
+    width: 100%;
     resize: none;
     font-family: monospace;
   }
@@ -56,8 +56,12 @@ label {
     content: '';
   }
 
-#outputPane>form input, #outputPane>form select {
+#outputPane>form input {
     width: 140px !important;
+  }
+
+#outputPane>form select {
+    width: 150px !important;
   }
 
 .readOnlyInput {
@@ -83,7 +87,7 @@ label {
 }
 
 .modal-dialog-title {
-  position:relative;
+  position: relative;
   background: #C3D9FF;
   padding: 4px;
   font: bold 11px verdana;
@@ -114,4 +118,17 @@ label {
 
 .modal-dialog-buttons button {
   margin: 5px;
+}
+
+.formeditor-field {
+  margin-left: 5px;
+  width: 175px;
+}
+
+.formeditor-textarea {
+  width: 99%;
+}
+
+.formeditor-clear {
+  clear: both;
 }
