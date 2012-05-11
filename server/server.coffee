@@ -48,8 +48,15 @@ class Server
     @documents = @dicom.collection("document")
 
   handleRequest: (request,response) =>
+
     url = Node.url.parse(request.url, true)
-      
+    
+    if request.headers['if-none-match']
+      response.statusCode = 304
+      response.end()
+      return
+
+
     if url.pathname == '/favicon.ico'
       response.writeHead 404
       response.end()
@@ -85,8 +92,12 @@ class Server
 
       if item.type == "dicomimage"
         @renderSingleImage item.sopUid, frameOrImage, response
+      else if item.type == "multiframe"
+        @renderSingleImage item.sopUid, frameOrImage, response
       else if item.type == "dicomimages"
         @renderImageFromImageSeries item, frameOrImage, response
+      else
+        @writeError response, "Unknown item type to render '#{item.type}'"
   
   renderImageFromImageSeries: (viewerItem, imageIndex, response) ->
 
@@ -120,6 +131,10 @@ class Server
 
   renderImageFromDocument_: (response, doc, frame = 0) ->
 
+    if not doc
+      @writeError response, "Could not render image. no document"
+      return
+
     maxRows = Settings.MaxRows
     quality = Settings.Quality
 
@@ -138,8 +153,12 @@ class Server
 
       outputPath = temp.path suffix:'.jpg'
       
+      
       args = @getDcmj2pnmRendererArguments path, outputPath, rowsToRender, frame, quality
       opts = { cwd: process.cwd() }
+      
+      #util.log "Rendering #{util.inspect args}"
+
       renderer = Node.execFile @rendererCommand, args, opts, (code, stdout, stderr) =>
         Node.path.exists outputPath, (outputExists) =>
           if not outputExists
@@ -157,6 +176,8 @@ class Server
               'Content-Type':'image/jpeg',
               'Access-Control-Allow-Origin': '*'
               'Access-Control-Allow-Methods': 'POST, GET'
+              'ETag': doc.uid
+              'Cache-Control': 'max-age=86400'
             }
           s.pipe response
 
